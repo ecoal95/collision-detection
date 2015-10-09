@@ -1,18 +1,3 @@
-# Simple makefile for a generic C project
-#
-# This expects a src/main.c file as executable,
-# and autodetects any other file under $(SRC_DIR).
-#
-# It expects those files to have a corresponding `.h` file
-#
-# Configure:
-#  * OVERRIDE_CC: I prefer clang
-#  * CC_FLAGS: Flags passed to the c compiler
-#  * CC_LINKFLAGS: Flags passed to the linker
-#  * EXECUTABLE_NAME: The name of the executable,
-#	   which will go inside $(TARGET_DIR)
-#  * {TARGET,BUILD,SRC}_DIR: Self-descriptive names
-
 OVERRIDE_CC ?= clang
 CC := $(OVERRIDE_CC)
 CC_FLAGS := $(CC_FLAGS) -Wall -std=c99 -fPIC

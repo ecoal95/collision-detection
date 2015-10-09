@@ -11,12 +11,18 @@ void projection_bounds(double axis_x,
     double max;
     double min;
 
+    double axis_modulus = modulus(axis_x, axis_y);
+
     for (size_t i = 0; i < len; i += 2) {
 
         double px = points[i];
         double py = points[i + 1];
 
-        double c = vector_projection(axis_x, axis_y, px, py);
+        double c = vector_projection_with_precalculated_axis_modulus(axis_x,
+                                                                     axis_y,
+                                                                     px,
+                                                                     py,
+                                                                     axis_modulus);
 
         if ( ! success ) {
             success = true;

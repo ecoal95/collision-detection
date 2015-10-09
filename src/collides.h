@@ -16,6 +16,11 @@ static inline bool overlap(double from_1, double to_1, double from_2, double to_
            (to_1 > from_2 && to_1 < to_2);     // Case 4: line 1 is overlapping from the left of line 2
 }
 
+/// Get the modulus of the vector (x, y)
+static inline double modulus(double x, double y) {
+    return sqrt(x * x + y * y);
+}
+
 /// Project p over the vector (x, y), to obtain the scalar c
 ///
 /// This is technically a vector projection of the vector p
@@ -37,9 +42,21 @@ static inline bool overlap(double from_1, double to_1, double from_2, double to_
 /// Substituting and simplifying:
 /// c = (p . v) / |v|
 ///
+static inline double vector_projection_with_precalculated_axis_modulus(double axis_x,
+                                                                       double axis_y,
+                                                                       double px,
+                                                                       double py,
+                                                                       double axis_mod) {
+    return dotproduct(px, py, axis_x, axis_y) / axis_mod;
+}
+
+
 static inline double vector_projection(double axis_x, double axis_y, double px, double py) {
-    double axis_len = sqrt(axis_x * axis_x + axis_y * axis_y);
-    return dotproduct(px, py, axis_x, axis_y) / axis_len;
+    return vector_projection_with_precalculated_axis_modulus(axis_x,
+                                                             axis_y,
+                                                             px,
+                                                             py,
+                                                             modulus(axis_x, axis_y));
 }
 
 void projection_bounds(double axis_x,
