@@ -47,4 +47,4 @@ $(BUILD_DIR)/tests/tests: $(TEST_OBJECTS) $(LIB)
 
 .PHONY: clean
 clean:
-	rm -r $(BUILD_DIR) $(TARGET_DIR)
+	rm -rf $(BUILD_DIR) $(TARGET_DIR)
